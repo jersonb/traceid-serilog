@@ -19,8 +19,10 @@ services.AddSerilog(config =>
 });
 
 services.AddTransient<TraceIdMiddleware>();
+
 services.AddSingleton<ShippingQueue>();
 services.AddHostedService<ShippingConsume>();
+
 services.AddControllers();
 services.AddOpenApi();
 
@@ -40,5 +42,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(options =>
+{
+    options
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 await app.RunAsync();

@@ -11,8 +11,9 @@ public class ShippingController(
     : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> Post([FromHeader(Name = "X-trace-id")] string? traceId
-        , ShippingCreate create)
+    public async Task<IActionResult> Post(
+        [FromHeader(Name = "X-trace-id")] string? traceId, 
+        ShippingCreate create)
     {
         logger.LogInformation("Received shipping create request: {@Request}", create);
 
